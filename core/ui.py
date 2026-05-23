@@ -9,8 +9,8 @@ def render_sidebar_header():
     st.sidebar.markdown(
         """
         <div style='text-align: center; padding: 1.5rem 0; border-bottom: 1px solid #2c2c2e;'>
-            <h1 style='margin: 0; font-size: 1.4rem;'>🤖</h1>
-            <p style='margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #9a9a9c;'><b>Hub Booz</b></p>
+            <h1 style='margin: 0; font-size: 1.4rem;'>🎼</h1>
+            <p style='margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #9a9a9c;'><b>Orquestra ClickUp</b></p>
         </div>
         """,
         unsafe_allow_html=True,
@@ -88,8 +88,8 @@ def render_main_welcome():
         st.markdown(
             """
             <div style='text-align: center; padding: 3rem 0;'>
-                <p style='font-size: 3rem; margin: 0;'>🤖</p>
-                <h2 style='color: #9a9a9c; margin: 1rem 0 0.5rem 0;'>Bem-vindo ao Hub de Automações</h2>
+                <p style='font-size: 3rem; margin: 0;'>🎼</p>
+                <h2 style='color: #9a9a9c; margin: 1rem 0 0.5rem 0;'>Bem-vindo à Orquestra ClickUp</h2>
                 <p style='color: #6a6a6c; margin: 0;'>Selecione uma automação na barra lateral para começar.</p>
             </div>
             """,

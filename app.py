@@ -1,4 +1,4 @@
-"""Hub de automações ClickUp — app principal com roteamento via sidebar."""
+"""Orquestra ClickUp — app principal com roteamento via sidebar."""
 import os
 from pathlib import Path
 
@@ -14,8 +14,8 @@ load_dotenv(ENV_PATH)
 
 # ── Config ─────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Hub ClickUp — Booz",
-    page_icon="🤖",
+    page_title="Orquestra ClickUp",
+    page_icon="🎼",
     layout="wide",
     initial_sidebar_state="expanded",
 )

@@ -165,14 +165,3 @@ elif pagina and pagina != "__config__":
 # ── Página: Boas-vindas (padrão) ───────────────────────────────────────────
 else:
     render_main_welcome()
-
-    st.divider()
-
-    with st.expander("ℹ️ Como começar"):
-        st.markdown(
-            """
-            1. **Configure suas credenciais** — clique em **⚙️ Configurações** na barra lateral
-            2. **Descreva a primeira automação** — ela aparecerá aqui
-            3. **Selecione e execute** — cada automação tem sua própria interface
-            """
-        )

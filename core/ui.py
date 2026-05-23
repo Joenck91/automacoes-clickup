@@ -8,9 +8,9 @@ def render_sidebar_header():
     """Logo e título da sidebar."""
     st.sidebar.markdown(
         """
-        <div style='text-align: center; padding: 1.5rem 0; border-bottom: 1px solid #2c2c2e;'>
-            <h1 style='margin: 0; font-size: 1.4rem;'>🎼</h1>
-            <p style='margin: 0.3rem 0 0 0; font-size: 0.9rem; color: #9a9a9c;'><b>Orquestra ClickUp</b></p>
+        <div style='text-align: center; padding: 2rem 0; border-bottom: 1px solid #2c2c2e;'>
+            <h1 style='margin: 0; font-size: 2.5rem;'>🎼</h1>
+            <p style='margin: 0.5rem 0 0 0; font-size: 1.2rem; color: #9a9a9c;'><b>Orquestra ClickUp</b></p>
         </div>
         """,
         unsafe_allow_html=True,

@@ -1,15 +1,14 @@
 """Catálogo de automações."""
 
 AUTOMACOES = [
-    # Exemplo (descomente quando tiver a primeira automação):
-    # {
-    #     "id": "disparos",
-    #     "icon": "📨",
-    #     "titulo": "Disparos",
-    #     "descricao": "Atualiza cards via planilha de campanha",
-    #     "disponivel": True,
-    #     "render_fn": "render_disparos",  # função em core/automacoes/ ou importada dinâmicamente
-    # },
+    {
+        "id": "importar_leads",
+        "icon": "📥",
+        "titulo": "Importar Leads",
+        "descricao": "Cria cards em massa a partir de uma planilha de leads",
+        "disponivel": True,
+        "render_fn": "render_importar_leads",
+    },
 ]
 
 

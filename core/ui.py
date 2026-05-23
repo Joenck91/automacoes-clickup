@@ -8,7 +8,7 @@ def render_sidebar_header():
     """Logo e título da sidebar."""
     st.sidebar.markdown(
         """
-        <div style='text-align: center; padding: 2rem 0; border-bottom: 1px solid #2c2c2e;'>
+        <div style='text-align: center; padding: 0 0 0.3rem 0;'>
             <h1 style='margin: 0; font-size: 2.5rem;'>🎼</h1>
             <p style='margin: 0.5rem 0 0 0; font-size: 1.2rem; color: #9a9a9c;'><b>Orquestra ClickUp</b></p>
         </div>
@@ -18,7 +18,7 @@ def render_sidebar_header():
 
 
 def render_connection_status():
-    """Status de conexão na sidebar."""
+    """Status de conexão — texto pequeno e centralizado, sem background."""
     try:
         cu = ClickUp()
         team_id = os.getenv("CLICKUP_TEAM_ID", "9007176994")
@@ -28,21 +28,27 @@ def render_connection_status():
         if team:
             st.sidebar.markdown(
                 f"""
-                <div style='padding: 0.8rem; margin: 0.5rem 0; background: #1e3a2f; border-radius: 8px;'>
-                    <span style='color: #4ade80; font-size: 0.85rem;'>● Conectado</span>
-                    <p style='margin: 0.3rem 0 0 0; font-size: 0.75rem; color: #9a9a9c;'>{team.get('name', team_id)}</p>
+                <div style='text-align: center; padding: 0 0 1.2rem 0;'>
+                    <span style='color: #4ade80; font-size: 0.8rem;'>● Conectado</span>
+                    <span style='color: #6a6a6c; font-size: 0.75rem;'> · {team.get('name', team_id)}</span>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
         else:
-            st.sidebar.warning(f"Token válido, mas workspace `{team_id}` não encontrado.")
-    except Exception as e:
+            st.sidebar.markdown(
+                f"""
+                <div style='text-align: center; padding: 0 0 1.2rem 0;'>
+                    <span style='color: #fbbf24; font-size: 0.8rem;'>● Workspace não encontrado</span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+    except Exception:
         st.sidebar.markdown(
-            f"""
-            <div style='padding: 0.8rem; margin: 0.5rem 0; background: #3a1e1e; border-radius: 8px;'>
-                <span style='color: #f87171; font-size: 0.85rem;'>● Erro</span>
-                <p style='margin: 0.3rem 0 0 0; font-size: 0.7rem; color: #9a9a9c;'>Verifique as configurações</p>
+            """
+            <div style='text-align: center; padding: 0 0 1.2rem 0;'>
+                <span style='color: #f87171; font-size: 0.8rem;'>● Sem conexão</span>
             </div>
             """,
             unsafe_allow_html=True,
@@ -72,9 +78,8 @@ def render_nav_menu(automacoes: list, page_ativa: str) -> str:
             ):
                 pagina_selecionada = key
 
-    st.sidebar.markdown("<hr style='margin: 1rem 0; border: none; border-top: 1px solid #2c2c2e;'>", unsafe_allow_html=True)
-    st.sidebar.markdown("<p style='margin: 0.5rem 0; font-size: 0.75rem; color: #6a6a6c; text-transform: uppercase; font-weight: 600;'>SISTEMA</p>", unsafe_allow_html=True)
-
+    # Configurações é o último item — CSS no app.py aplica margin-top: auto
+    # no :last-child da sidebar, empurrando este botão para o fundo.
     if st.sidebar.button("⚙️ Configurações", key="nav_config", use_container_width=True):
         pagina_selecionada = "__config__"
 

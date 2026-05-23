@@ -8,9 +8,10 @@ from dotenv import load_dotenv, set_key, dotenv_values
 from core.clickup_api import ClickUp
 from core.ui import render_sidebar_header, render_connection_status, render_nav_menu, render_main_welcome
 from core.automacoes import listar_automacoes
+from core import automacoes_pages
 
 ENV_PATH = Path(__file__).parent / ".env"
-load_dotenv(ENV_PATH)
+load_dotenv(ENV_PATH, override=True)
 
 # ── Config ─────────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -26,6 +27,43 @@ st.markdown(
     <style>
     /* Remover sidebar padrão do Streamlit */
     [data-testid="stSidebarNav"] { display: none; }
+
+    /* Reduzir padding-top do block-container da sidebar (cobre todas as variações de versão) */
+    section[data-testid="stSidebar"] .block-container,
+    section[data-testid="stSidebar"] [class*="block-container"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarContent"] > div {
+        padding-top: 1rem !important;
+    }
+
+    /* Garantir altura total em todos os ancestrais da lista de widgets */
+    section[data-testid="stSidebar"] [data-testid="stSidebarContent"],
+    section[data-testid="stSidebar"] [data-testid="stSidebarUserContent"] {
+        height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    section[data-testid="stSidebar"] .block-container,
+    section[data-testid="stSidebar"] [class*="block-container"] {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlockBorderWrapper"],
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+        flex-grow: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Empurra o último widget (Configurações) para o fundo */
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] > [data-testid="stElementContainer"]:last-child,
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] > [data-testid="element-container"]:last-child,
+    section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] > div:last-child {
+        margin-top: auto !important;
+    }
 
     /* Botões da navbar */
     .stButton > button {
@@ -129,6 +167,9 @@ if pagina == "__config__":
             set_key(str(ENV_PATH), "CLICKUP_TEAM_ID", novo_team.strip())
             set_key(str(ENV_PATH), "CLICKUP_DEFAULT_LIST_ID", novo_list.strip())
 
+            # Recarrega .env em memória para o novo valor valer imediatamente
+            load_dotenv(ENV_PATH, override=True)
+
             try:
                 cu_test = ClickUp(token=novo_token.strip())
                 teams = cu_test._req("GET", "/team").get("teams", [])
@@ -158,7 +199,13 @@ elif pagina and pagina != "__config__":
         st.title(f"{auto['icon']} {auto['titulo']}")
         st.caption(auto.get("descricao", ""))
         st.divider()
-        st.info("Automação em desenvolvimento. Volte em breve!")
+
+        render_fn_name = auto.get("render_fn")
+        render_fn = getattr(automacoes_pages, render_fn_name, None) if render_fn_name else None
+        if render_fn:
+            render_fn()
+        else:
+            st.info("Automação em desenvolvimento. Volte em breve!")
     else:
         st.error(f"Automação '{pagina}' não encontrada.")
 

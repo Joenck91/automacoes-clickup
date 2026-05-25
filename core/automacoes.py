@@ -17,6 +17,22 @@ AUTOMACOES = [
         "disponivel": True,
         "render_fn": "render_atualizar_em_massa",
     },
+    {
+        "id": "exportar_leads",
+        "icon": "📤",
+        "titulo": "Exportar Leads",
+        "descricao": "Gera planilha Excel de cards do ClickUp aplicando filtros (E e OU)",
+        "disponivel": True,
+        "render_fn": "render_exportar_leads",
+    },
+    {
+        "id": "atualizar_por_filtros",
+        "icon": "🎯",
+        "titulo": "Atualizar por Filtros",
+        "descricao": "Atualiza cards selecionados via filtros do ClickUp, sem planilha",
+        "disponivel": True,
+        "render_fn": "render_atualizar_por_filtros",
+    },
 ]
 
 

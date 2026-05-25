@@ -9,6 +9,14 @@ AUTOMACOES = [
         "disponivel": True,
         "render_fn": "render_importar_leads",
     },
+    {
+        "id": "atualizar_em_massa",
+        "icon": "🔄",
+        "titulo": "Atualização em Massa",
+        "descricao": "Atualiza cards existentes a partir de uma planilha com regras configuráveis",
+        "disponivel": True,
+        "render_fn": "render_atualizar_em_massa",
+    },
 ]
 
 
